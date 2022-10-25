@@ -21,17 +21,51 @@ public class UserController : ControllerBase
         _context = context;
     }
 
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Utilisateur>> GetTodoItem(int id)
-    {
-        var todoItem = await _context.Utilisateurs.FindAsync(id);
+    // GET ALL USERS
+    // [HttpGet]
+    // public async Task<ActionResult<IEnumerable<Utilisateur>>> GetTodoItems()
+    // {
+    //     return await _context.Utilisateurs.ToListAsync();
+    // }
 
-        if (todoItem == null)
+    // GET USER BY ID
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Utilisateur>> GetUser(int id)
+    {
+        var getUser = await _context.Utilisateurs.FindAsync(id);
+        if (getUser == null)
         {
             return NotFound();
         }
 
-        return todoItem;
+        return getUser;
+    }
+
+    // CREATE USER
+    [HttpPost]
+    public async Task<ActionResult<Utilisateur>> PostUser(Utilisateur user)
+    {
+        _context.Utilisateurs.Add(user);
+        await _context.SaveChangesAsync();
+
+        //return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
+        return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+    }
+
+    // DELETE USER BY ID
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteUser(int id)
+    {
+        var deleteUser = await _context.Utilisateurs.FindAsync(id);
+        if (deleteUser == null)
+        {
+            return NotFound();
+        }
+
+        _context.Utilisateurs.Remove(deleteUser);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
     }
 
     // [HttpGet(Name = "GetWeatherForecast")]

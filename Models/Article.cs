@@ -7,27 +7,27 @@ namespace cubeBackend.Models
     {
         public Article()
         {
-            IdClients = new HashSet<Utilisateur>();
+            Id1s = new HashSet<Utilisateur>();
         }
 
-        public int IdArticle { get; set; }
+        public int Id { get; set; }
         public string? Nom { get; set; }
-        public string? Annee { get; set; }
-        public string? PrixUnitaire { get; set; }
-        public string? PrixCarton { get; set; }
-        public string? PrixFournisseur { get; set; }
+        public DateOnly? Annee { get; set; }
+        public decimal? PrixUnitaire { get; set; }
+        public decimal? PrixCarton { get; set; }
+        public decimal? PrixFournisseur { get; set; }
         public string? Reference { get; set; }
-        public string? Tva { get; set; }
+        public decimal? Tva { get; set; }
         public string? Domaine { get; set; }
         public string? Description { get; set; }
         public string? Famille { get; set; }
-        public string? CoutStockage { get; set; }
-        public int IdFournisseur { get; set; }
-        public int IdCommandeClient { get; set; }
+        public decimal? CoutStockage { get; set; }
+        public int Id1 { get; set; }
+        public int Id2 { get; set; }
 
-        public virtual CommandeClient IdCommandeClientNavigation { get; set; } = null!;
-        public virtual Fournisseur IdFournisseurNavigation { get; set; } = null!;
+        public virtual Fournisseur Id1Navigation { get; set; } = null!;
+        public virtual CommandeClient Id2Navigation { get; set; } = null!;
 
-        public virtual ICollection<Utilisateur> IdClients { get; set; }
+        public virtual ICollection<Utilisateur> Id1s { get; set; }
     }
 }

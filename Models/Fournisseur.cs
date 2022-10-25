@@ -10,7 +10,7 @@ namespace cubeBackend.Models
             Articles = new HashSet<Article>();
         }
 
-        public int IdFournisseur { get; set; }
+        public int Id { get; set; }
         public string? Nom { get; set; }
         public string? Email { get; set; }
         public string? Telephone { get; set; }
@@ -20,9 +20,9 @@ namespace cubeBackend.Models
         public string? CodePostal { get; set; }
         public string? Ville { get; set; }
         public string? Description { get; set; }
-        public int IdCommandeFournisseur { get; set; }
+        public int Id1 { get; set; }
 
-        public virtual CommandeFournisseur IdCommandeFournisseurNavigation { get; set; } = null!;
+        public virtual CommandeFournisseur Id1Navigation { get; set; } = null!;
         public virtual ICollection<Article> Articles { get; set; }
     }
 }

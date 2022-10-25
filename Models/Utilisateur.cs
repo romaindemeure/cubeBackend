@@ -9,10 +9,10 @@ namespace cubeBackend.Models
         {
             CommandeClients = new HashSet<CommandeClient>();
             CommandeFournisseurs = new HashSet<CommandeFournisseur>();
-            IdArticles = new HashSet<Article>();
+            Ids = new HashSet<Article>();
         }
 
-        public int IdClient { get; set; }
+        public int Id { get; set; }
         public string? Nom { get; set; }
         public string? Prenom { get; set; }
         public string? Email { get; set; }
@@ -21,11 +21,11 @@ namespace cubeBackend.Models
         public string? CodePostal { get; set; }
         public string? Ville { get; set; }
         public string? Telephone { get; set; }
-        public string? Administrateur { get; set; }
+        public bool? Administrateur { get; set; }
 
         public virtual ICollection<CommandeClient> CommandeClients { get; set; }
         public virtual ICollection<CommandeFournisseur> CommandeFournisseurs { get; set; }
 
-        public virtual ICollection<Article> IdArticles { get; set; }
+        public virtual ICollection<Article> Ids { get; set; }
     }
 }

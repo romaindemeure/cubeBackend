@@ -1,5 +1,5 @@
 CREATE TABLE utilisateur(
-   Id_client INT,
+   id INT,
    nom VARCHAR(50),
    prenom VARCHAR(50),
    email VARCHAR(50),
@@ -8,40 +8,40 @@ CREATE TABLE utilisateur(
    codePostal VARCHAR(50),
    ville VARCHAR(50),
    telephone VARCHAR(50),
-   administrateur VARCHAR(50),
-   PRIMARY KEY(Id_client)
+   administrateur TINYINT(1),
+   PRIMARY KEY(id)
 );
 
 CREATE TABLE commandeClient(
-   Id_commandeClient INT,
-   nombreArticle VARCHAR(50),
-   numeroCommande VARCHAR(50),
-   prixHorsTaxe VARCHAR(50),
-   prixTTC VARCHAR(50),
-   dateCommande VARCHAR(50),
-   reduction VARCHAR(50),
-   coutLivraison VARCHAR(50),
-   Id_client INT NOT NULL,
-   PRIMARY KEY(Id_commandeClient),
-   FOREIGN KEY(Id_client) REFERENCES utilisateur(Id_client)
+   id INT,
+   nombreArticle INT,
+   numeroCommande INT,
+   prixHorsTaxe DECIMAL(15,2),
+   prixTTC DECIMAL(15,2),
+   dateCommande DATE,
+   reduction DECIMAL(15,2),
+   coutLivraison DECIMAL(15,2),
+   id_1 INT NOT NULL,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_1) REFERENCES utilisateur(id)
 );
 
 CREATE TABLE commandeFournisseur(
-   Id_commandeFournisseur INT,
-   nombreArticle VARCHAR(50),
-   numeroCommande VARCHAR(50),
-   prixHorsTaxe VARCHAR(50),
-   prixTTC VARCHAR(50),
-   dateCommande VARCHAR(50),
-   reduction VARCHAR(50),
-   coutLivraison VARCHAR(50),
-   Id_client INT NOT NULL,
-   PRIMARY KEY(Id_commandeFournisseur),
-   FOREIGN KEY(Id_client) REFERENCES utilisateur(Id_client)
+   id INT,
+   nombreArticle INT,
+   numeroCommande INT,
+   prixHorsTaxe DECIMAL(15,2),
+   prixTTC DECIMAL(15,2),
+   dateCommande DATE,
+   reduction DECIMAL(15,2),
+   coutLivraison DECIMAL(15,2),
+   id_1 INT NOT NULL,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_1) REFERENCES utilisateur(id)
 );
 
 CREATE TABLE fournisseur(
-   Id_fournisseur INT,
+   id INT,
    nom VARCHAR(50),
    email VARCHAR(50),
    telephone VARCHAR(50),
@@ -51,35 +51,35 @@ CREATE TABLE fournisseur(
    codePostal VARCHAR(50),
    ville VARCHAR(50),
    description VARCHAR(50),
-   Id_commandeFournisseur INT NOT NULL,
-   PRIMARY KEY(Id_fournisseur),
-   FOREIGN KEY(Id_commandeFournisseur) REFERENCES commandeFournisseur(Id_commandeFournisseur)
+   id_1 INT NOT NULL,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_1) REFERENCES commandeFournisseur(id)
 );
 
 CREATE TABLE article(
-   Id_article INT,
+   id INT,
    nom VARCHAR(50),
-   annee VARCHAR(50),
-   prixUnitaire VARCHAR(50),
-   prixCarton VARCHAR(50),
-   prixFournisseur VARCHAR(50),
+   annee DATE,
+   prixUnitaire DECIMAL(15,2),
+   prixCarton DECIMAL(15,2),
+   prixFournisseur DECIMAL(15,2),
    reference VARCHAR(50),
-   tva VARCHAR(50),
+   tva DECIMAL(15,2),
    domaine VARCHAR(50),
    description VARCHAR(50),
    famille VARCHAR(50),
-   coutStockage VARCHAR(50),
-   Id_fournisseur INT NOT NULL,
-   Id_commandeClient INT NOT NULL,
-   PRIMARY KEY(Id_article),
-   FOREIGN KEY(Id_fournisseur) REFERENCES fournisseur(Id_fournisseur),
-   FOREIGN KEY(Id_commandeClient) REFERENCES commandeClient(Id_commandeClient)
+   coutStockage DECIMAL(15,2),
+   id_1 INT NOT NULL,
+   id_2 INT NOT NULL,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_1) REFERENCES fournisseur(id),
+   FOREIGN KEY(id_2) REFERENCES commandeClient(id)
 );
 
 CREATE TABLE gerer(
-   Id_article INT,
-   Id_client INT,
-   PRIMARY KEY(Id_article, Id_client),
-   FOREIGN KEY(Id_article) REFERENCES article(Id_article),
-   FOREIGN KEY(Id_client) REFERENCES utilisateur(Id_client)
+   id INT,
+   id_1 INT,
+   PRIMARY KEY(id, id_1),
+   FOREIGN KEY(id) REFERENCES article(id),
+   FOREIGN KEY(id_1) REFERENCES utilisateur(id)
 );

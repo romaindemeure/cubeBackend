@@ -5,3 +5,5 @@ dotnet ef dbcontext scaffold "server=localhost;port=3306;user=cubeUser;password=
 # Run projet
 
 dotnet watch
+
+# Name of ORM = EF CORE

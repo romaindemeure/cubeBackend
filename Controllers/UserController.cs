@@ -1,17 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using cubeBackend.Models;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 namespace cubeBackend.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
-    // private static readonly string[] Summaries = new[]
-    // {
-    //     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    // };
-
     private readonly ILogger<UserController> _logger;
     private readonly cubeSQLContext _context;
 
@@ -22,11 +21,11 @@ public class UserController : ControllerBase
     }
 
     // GET ALL USERS
-    // [HttpGet]
-    // public async Task<ActionResult<IEnumerable<Utilisateur>>> GetTodoItems()
-    // {
-    //     return await _context.Utilisateurs.ToListAsync();
-    // }
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Utilisateur>>> GetUsers()
+    {
+        return await _context.Utilisateurs.ToListAsync();
+    }
 
     // GET USER BY ID
     [HttpGet("{id}")]
@@ -52,6 +51,38 @@ public class UserController : ControllerBase
         return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
     }
 
+    // UPDATE USER BY ID
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutUser(int id, Utilisateur user)
+    {
+        Console.WriteLine("fdp");
+        Console.WriteLine(user.Id);
+        if (id != user.Id)
+        {
+            return BadRequest();
+        }
+
+        _context.Entry(user).State = EntityState.Modified;
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!UserExist(id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        return NoContent();
+    }
+
     // DELETE USER BY ID
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteUser(int id)
@@ -68,15 +99,9 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
-    // [HttpGet(Name = "GetWeatherForecast")]
-    // public IEnumerable<WeatherForecast> Get()
-    // {
-    //     return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-    //     {
-    //         Date = DateTime.Now.AddDays(index),
-    //         TemperatureC = Random.Shared.Next(-20, 55),
-    //         Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-    //     })
-    //     .ToArray();
-    // }
+    // CHECK IF USER EXIST
+    private bool UserExist(int id)
+    {
+        return _context.Utilisateurs.Any(e => e.Id == id);
+    }
 }

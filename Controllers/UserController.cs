@@ -1,14 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using cubeBackend.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 namespace cubeBackend.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/Utilisateur")]
 public class UserController : ControllerBase
 {
     private readonly ILogger<UserController> _logger;
@@ -55,7 +51,6 @@ public class UserController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutUser(int id, Utilisateur user)
     {
-        Console.WriteLine("fdp");
         Console.WriteLine(user.Id);
         if (id != user.Id)
         {

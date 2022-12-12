@@ -16,14 +16,14 @@ public class CommandeFournisseurController : ControllerBase
         _context = context;
     }
 
-    // GET ALL USERS
+    // GET ALL COMMANDES FOURNISSEURS
     [HttpGet]
     public async Task<ActionResult<IEnumerable<CommandeFournisseur>>> GetCommandeFournisseurs()
     {
         return await _context.CommandeFournisseurs.ToListAsync();
     }
 
-    // GET USER BY ID
+    // GET COMMANDE FOURNISSEUR BY ID
     [HttpGet("{id}")]
     public async Task<ActionResult<CommandeFournisseur>> GetCommandeFournisseur(int id)
     {
@@ -36,7 +36,7 @@ public class CommandeFournisseurController : ControllerBase
         return CommandeFournisseur;
     }
 
-    // CREATE USER
+    // CREATE COMMANDE FOURNISSEUR
     [HttpPost]
     public async Task<ActionResult<CommandeFournisseur>> PostCommandeFournisseur(CommandeFournisseur commandefournisseur)
     {
@@ -47,7 +47,7 @@ public class CommandeFournisseurController : ControllerBase
         return CreatedAtAction(nameof(GetCommandeFournisseur), new { id = commandefournisseur.Id }, commandefournisseur);
     }
 
-    // UPDATE USER BY ID
+    // UPDATE COMMANDE FOURNISSEUR BY ID
     [HttpPut("{id}")]
     public async Task<IActionResult> PutCommandeFournisseur(int id, CommandeFournisseur commandefournisseur)
     {
@@ -78,7 +78,7 @@ public class CommandeFournisseurController : ControllerBase
         return NoContent();
     }
 
-    // DELETE USER BY ID
+    // DELETE COMMANDE FOURNISSEUR BY ID
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCommandeFournisseur(int id)
     {
@@ -94,7 +94,7 @@ public class CommandeFournisseurController : ControllerBase
         return NoContent();
     }
 
-    // CHECK IF USER EXIST
+    // CHECK IF COMMANDE FOURNISSEUR EXIST
     private bool CommandeFournisseurExist(int id)
     {
         return _context.CommandeFournisseurs.Any(e => e.Id == id);

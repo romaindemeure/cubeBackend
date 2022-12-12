@@ -16,14 +16,14 @@ public class CommandeClientController : ControllerBase
         _context = context;
     }
 
-    // GET ALL USERS
+    // GET ALL COMMANDES CLIENTS
     [HttpGet]
     public async Task<ActionResult<IEnumerable<CommandeClient>>> GetCommandeClients()
     {
         return await _context.CommandeClients.ToListAsync();
     }
 
-    // GET USER BY ID
+    // GET COMMANDE CLIENT BY ID
     [HttpGet("{id}")]
     public async Task<ActionResult<CommandeClient>> GetCommandeClient(int id)
     {
@@ -36,7 +36,7 @@ public class CommandeClientController : ControllerBase
         return CommandeClient;
     }
 
-    // CREATE USER
+    // CREATE COMMANDE CLIENT
     [HttpPost]
     public async Task<ActionResult<CommandeClient>> PostCommandeClient(CommandeClient commandeclient)
     {
@@ -47,7 +47,7 @@ public class CommandeClientController : ControllerBase
         return CreatedAtAction(nameof(GetCommandeClient), new { id = commandeclient.Id }, commandeclient);
     }
 
-    // UPDATE USER BY ID
+    // UPDATE COMMANDE CLIENT BY ID
     [HttpPut("{id}")]
     public async Task<IActionResult> PutCommandeClient(int id, CommandeClient commandeclient)
     {
@@ -78,7 +78,7 @@ public class CommandeClientController : ControllerBase
         return NoContent();
     }
 
-    // DELETE USER BY ID
+    // DELETE COMMANDE CLIENT BY ID
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCommandeClient(int id)
     {
@@ -94,7 +94,7 @@ public class CommandeClientController : ControllerBase
         return NoContent();
     }
 
-    // CHECK IF USER EXIST
+    // CHECK IF COMMANDE CLIENT EXIST
     private bool CommandeClientExist(int id)
     {
         return _context.CommandeClients.Any(e => e.Id == id);

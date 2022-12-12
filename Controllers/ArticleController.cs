@@ -16,14 +16,14 @@ public class ArticleController : ControllerBase
         _context = context;
     }
 
-    // GET ALL USERS
+    // GET ALL ARTICLES
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Article>>> GetArticles()
     {
         return await _context.Articles.ToListAsync();
     }
 
-    // GET USER BY ID
+    // GET ARTICLE BY ID
     [HttpGet("{id}")]
     public async Task<ActionResult<Article>> GetArticle(int id)
     {
@@ -36,7 +36,7 @@ public class ArticleController : ControllerBase
         return GetArticle;
     }
 
-    // CREATE USER
+    // CREATE ARTICLE
     [HttpPost]
     public async Task<ActionResult<Article>> PostArticle(Article article)
     {
@@ -47,7 +47,7 @@ public class ArticleController : ControllerBase
         return CreatedAtAction(nameof(GetArticle), new { id = article.Id }, article);
     }
 
-    // UPDATE USER BY ID
+    // UPDATE ARTICLE BY ID
     [HttpPut("{id}")]
     public async Task<IActionResult> PutArticle(int id, Article article)
     {
@@ -78,7 +78,7 @@ public class ArticleController : ControllerBase
         return NoContent();
     }
 
-    // DELETE USER BY ID
+    // DELETE ARTICLE BY ID
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteArticle(int id)
     {
@@ -94,7 +94,7 @@ public class ArticleController : ControllerBase
         return NoContent();
     }
 
-    // CHECK IF USER EXIST
+    // CHECK IF ARTICLE EXIST
     private bool ArticleExist(int id)
     {
         return _context.Articles.Any(e => e.Id == id);
